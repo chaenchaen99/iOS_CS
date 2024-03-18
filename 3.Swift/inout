@@ -1,0 +1,32 @@
+## 
+
+어떤 변수가 매개변수로 함수에 전달되면 그 매개변수는 해당 함수내에서 상수로 취급된다.
+또한, 매개변수의 값을 변경하고 싶을 때에는 섀도 복사본을 생성해야 한다.
+
+var myValue = 10
+
+func doubleValue(_ value:Int) -> Int {
+    var value = value
+    value += value
+    return(value)
+}
+
+print("Before function call myValue\ = \(myValue)")
+print("doubleValue call returns  \(doubleValue(myValue))")
+print("After function call myValue = \(myValue)")
+
+=> 10,20,10
+
+확실히 이 함수는 원본인 myValue 변수를 변경하지 않았다. 왜냐하면 myValue가 아닌 복사본을 가지고 수학적 연산이 수행되었기 때문이다.
+함수가 값을 반환한 뒤에도 매개변수에 대한 변경을 유지하려면, 함수 선언부 내에서 매개변수를 입출력 매개변수(in-out parameter)로 선언해야 한다.
+이를 확인하기 위해 다음과 같이 doubleValue함수를 수정하여 inout키워드를 추가하고 섀도 복사본을 삭제한다.
+
+func doubleValue(_ value: inout Int) -> Int {
+    value += value
+    return(value)
+}
+
+마지막으로, 함수를 호출할 때 입출력 매개변수 앞에 &를 붙여야 한다.
+print("doublevalue call returned \(doubleValue(&myValue))")
+
+=> 10,20,20
