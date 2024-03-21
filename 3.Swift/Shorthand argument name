@@ -1,0 +1,15 @@
+## Shorthand argument name
+단어자체가 어려워 보이지만, 약식 인수 이름이라고 하는 클로저를 단순화하는 유용한 기술이다.
+이것은 선언부에서 매개변수 이름과 in 키워드를 생략할 수 있게 하며, 인수를 $0,$1, $2 등으로 참조할 수 있다.
+
+예를 들어, 다음과 같이 두 문자열을 연결하도록 설계된 클로저 표현식이 있다고 하자.
+
+let json = {(string1: String, srting2: String) -> String in
+    string1 + string2
+}
+
+약식 인수 이름을 사용하여 이 선언을 다음과 같이 단순화할 수 있다.
+
+let json: (String, String) -> String = {
+    $0 + $1
+}
